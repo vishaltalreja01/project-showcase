@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Heart, Rocket } from 'lucide-react';
+import { Heart, Rocket } from 'lucide-react';
 
 const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
