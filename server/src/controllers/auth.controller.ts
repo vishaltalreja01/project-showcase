@@ -43,7 +43,18 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
                 await existingUser.save();
 
                 // Send verification email
-                await sendVerificationEmail(email, existingUser.name, token);
+                try {
+                    await sendVerificationEmail(email, existingUser.name, token);
+                } catch (emailError) {
+                    console.error('Failed to resend verification email during signup:', emailError);
+
+                    res.status(202).json({
+                        success: true,
+                        message: 'Account exists but the verification email could not be sent. Please try resending it later.',
+                        needsVerification: true
+                    });
+                    return;
+                }
 
                 res.status(200).json({
                     success: true,
@@ -75,7 +86,18 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
         await user.save();
 
         // Send verification email
-        await sendVerificationEmail(email, name, token);
+        try {
+            await sendVerificationEmail(email, name, token);
+        } catch (emailError) {
+            console.error('Failed to send verification email during signup:', emailError);
+
+            res.status(202).json({
+                success: true,
+                message: 'Account created, but the verification email could not be sent. Please try resending it later.',
+                needsVerification: true
+            });
+            return;
+        }
 
         res.status(201).json({
             success: true,

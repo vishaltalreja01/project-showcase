@@ -6,6 +6,10 @@ const escapeHtml = (str: string): string =>
        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 
 const createTransporter = () => {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        throw new Error('EMAIL_USER and EMAIL_PASS environment variables are required to send email');
+    }
+
     return nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
