@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import Layout from '../components/layout/Layout';
 import ProjectCard from '../components/common/ProjectCard';
-import LoadingSpinner from '../components/common/LoadingSpinner';
 import EmptyState from '../components/common/EmptyState';
 import { Input } from '../components/ui/input';
 import { Skeleton } from '../components/ui/skeleton';
