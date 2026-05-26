@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar: React.FC = () => {
     const { isAuthenticated, user, logout } = useAuth();
-    const { theme, setTheme, effectiveTheme } = useTheme();
+    const { setTheme, effectiveTheme } = useTheme();
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
     const [showLogoutConfirm, setShowLogoutConfirm] = React.useState(false);
