@@ -14,6 +14,13 @@ dotenv.config();
 // Initialize express app
 const app: Application = express();
 
+const trustProxySetting = process.env.TRUST_PROXY;
+if (trustProxySetting) {
+    app.set('trust proxy', trustProxySetting === 'true' ? true : Number(trustProxySetting));
+} else if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+}
+
 // Connect to database
 connectDB();
 
